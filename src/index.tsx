@@ -1,12 +1,15 @@
 import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
 import { client } from "./apollo";
 import App from "./App";
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <RecoilRoot>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </RecoilRoot>,
   document.getElementById("root")
 );
