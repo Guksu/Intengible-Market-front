@@ -1,14 +1,62 @@
+import { useMutation } from "@apollo/client";
+import gql from "graphql-tag";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useSetRecoilState } from "recoil";
+import { isLogginAtom } from "../atom";
+
+interface LoginOutput {
+  ok: string;
+  error?: string;
+  token: string;
+}
+
+interface LoginMutation {
+  login: LoginOutput;
+}
+
+const LOGIN = gql`
+  mutation login($loginInput: LoginInput!) {
+    login(input: $loginInput) {
+      ok
+      error
+      token
+    }
+  }
+`;
 
 function Login() {
+  const isLogin = useSetRecoilState(isLogginAtom);
   const history = useHistory();
   const [id, setId] = useState("");
-  const [passwrod, setPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [login] = useMutation<LoginMutation>(LOGIN, {
+    variables: {
+      loginInput: {
+        id,
+        password,
+      },
+    },
+  });
 
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await login();
+      if (data?.login.ok) {
+        localStorage.setItem("token", data.login.token);
+        isLogin(true);
+        history.push("/");
+      } else {
+        alert(data?.login.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <form>
+      <form onSubmit={onSubmit}>
         아이디 :{" "}
         <input
           type="text"
