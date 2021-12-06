@@ -2,15 +2,7 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useState } from "react";
 import { useHistory } from "react-router";
-
-interface EditProfileOutput {
-  ok: string;
-  error?: string;
-}
-
-interface EditProfileIF {
-  editProfile: EditProfileOutput;
-}
+import { EditProfileIF } from "../interface/EditProfileIF";
 
 const EDIT_USER = gql`
   mutation editProfile($editProfileInput: EditProfileInput!) {

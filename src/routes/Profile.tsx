@@ -1,37 +1,8 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { useHistory } from "react-router";
+import { ProductListIF, PurchaseList } from "../interface/ProfileIF";
 
-interface Product {
-  name: string;
-  volume: number;
-  nowVolume: number;
-}
-
-interface UserProductList {
-  ok: string;
-  error?: string;
-  product?: Product[];
-}
-
-interface ProductListIF {
-  userProductList: UserProductList;
-}
-
-interface PurchaeProduct {
-  name: string;
-  volume: string;
-}
-
-interface UserPurchaseProductList {
-  ok: string;
-  error?: string;
-  purchaseProduct: PurchaeProduct[];
-}
-
-interface PurchaseList {
-  userPurchaseProductList: UserPurchaseProductList;
-}
 const PRODUCT_LIST = gql`
   query userProductList {
     userProductList {
