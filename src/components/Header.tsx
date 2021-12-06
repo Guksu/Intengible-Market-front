@@ -13,6 +13,7 @@ function Header() {
     localStorage.clear();
     client.clearStore();
     setIsLogin(false);
+    history.push("/");
   };
   return (
     <>

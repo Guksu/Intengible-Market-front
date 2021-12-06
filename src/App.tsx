@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { isLogginAtom } from "./atom";
 import Header from "./components/Header";
 import Board from "./routes/Board";
 import EditProfile from "./routes/EditProfile";
@@ -10,6 +12,12 @@ import Profile from "./routes/Profile";
 import Register from "./routes/Register";
 
 function App() {
+  const isLogin = useSetRecoilState(isLogginAtom);
+  const token = localStorage.getItem("token");
+  if (token) {
+    isLogin(true);
+  }
+
   return (
     <BrowserRouter>
       <Header />
