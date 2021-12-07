@@ -1,30 +1,28 @@
+import { CommonOutput } from "./CommonIF";
+
 export interface Product {
   name: string;
   volume: number;
   nowVolume: number;
 }
 
-export interface UserProductList {
-  ok: string;
-  error?: string;
+export interface UserProductListOutput extends CommonOutput {
   product?: Product[];
 }
 
 export interface ProductListIF {
-  userProductList: UserProductList;
+  userProductList: UserProductListOutput;
 }
 
 export interface PurchaeProduct {
   name: string;
-  volume: string;
+  volume: number;
 }
 
-export interface UserPurchaseProductList {
-  ok: string;
-  error?: string;
+export interface UserPurchaseProductListOutput extends CommonOutput {
   purchaseProduct: PurchaeProduct[];
 }
 
 export interface PurchaseList {
-  userPurchaseProductList: UserPurchaseProductList;
+  userPurchaseProductList: UserPurchaseProductListOutput;
 }

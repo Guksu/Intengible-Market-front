@@ -7,7 +7,8 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Product from "./routes/Product";
 import Profile from "./routes/Profile";
-import Register from "./routes/Register";
+import RegisteProduct from "./routes/RegisteProduct";
+import Register from "./routes/RegisteUser";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/profile/edit" component={EditProfile} />
         <Route exact path="/product" component={Product} />
+        <Route exact path="/product/registe" component={RegisteProduct} />
         <Route exact path="/board" component={Board} />
       </Switch>
     </BrowserRouter>

@@ -34,7 +34,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await login();
-      if (data?.login.ok) {
+      if (data?.login.ok && data.login.token) {
         localStorage.setItem("token", data.login.token);
         isLogin(true);
         history.push("/");
