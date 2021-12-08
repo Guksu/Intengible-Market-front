@@ -18,11 +18,11 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/profile/edit" component={EditProfile} />
+        <Route exact path="/board" component={Board} />
         <Route exact path="/product" component={Product} />
         <Route exact path="/product/registe" component={RegisteProduct} />
-        <Route exact path="/board" component={Board} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/profile/edit" component={EditProfile} />
       </Switch>
     </BrowserRouter>
   );

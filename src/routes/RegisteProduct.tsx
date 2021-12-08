@@ -2,6 +2,8 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { useRecoilValue } from "recoil";
+import { isLogginAtom } from "../atom";
 import { CommonOutput } from "../interface/CommonIF";
 
 interface RegisterProductOutput extends CommonOutput {}
@@ -20,6 +22,7 @@ const REGISTE_PRODUCT = gql`
 `;
 
 function RegisteProduct() {
+  const isLoggin = useRecoilValue(isLogginAtom);
   const [name, setName] = useState("");
   const [file, setFile] = useState<FileList | null>();
   const [description, setDescription] = useState("");
@@ -77,57 +80,63 @@ function RegisteProduct() {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        상품명 :{" "}
-        <input
-          type="text"
-          required
-          name="name"
-          onChange={(e) => {
-            setName(e.currentTarget.value);
-          }}
-        />
-        이미지등록:{" "}
-        <input
-          type="file"
-          required
-          name="file"
-          accept="image/*"
-          onChange={(e) => {
-            setFile(e.currentTarget.files);
-          }}
-        />
-        상세설명 :{" "}
-        <textarea
-          required
-          name="description"
-          maxLength={400}
-          onChange={(e) => {
-            setDescription(e.currentTarget.value);
-          }}
-        />
-        가격:{" "}
-        <input
-          type="text"
-          required
-          onInput={changNum}
-          name="price"
-          onChange={(e) => {
-            setPrice(e.currentTarget.value);
-          }}
-        />
-        수량 :{" "}
-        <input
-          type="text"
-          required
-          onInput={changNum}
-          name="volume"
-          onChange={(e) => {
-            setVolume(e.currentTarget.value);
-          }}
-        />
-        <button>등록하기</button>
-      </form>
+      {isLoggin ? (
+        <div>
+          <form onSubmit={onSubmit}>
+            상품명 :{" "}
+            <input
+              type="text"
+              required
+              name="name"
+              onChange={(e) => {
+                setName(e.currentTarget.value);
+              }}
+            />
+            이미지등록:{" "}
+            <input
+              type="file"
+              required
+              name="file"
+              accept="image/*"
+              onChange={(e) => {
+                setFile(e.currentTarget.files);
+              }}
+            />
+            상세설명 :{" "}
+            <textarea
+              required
+              name="description"
+              maxLength={400}
+              onChange={(e) => {
+                setDescription(e.currentTarget.value);
+              }}
+            />
+            가격:{" "}
+            <input
+              type="text"
+              required
+              onInput={changNum}
+              name="price"
+              onChange={(e) => {
+                setPrice(e.currentTarget.value);
+              }}
+            />
+            수량 :{" "}
+            <input
+              type="text"
+              required
+              onInput={changNum}
+              name="volume"
+              onChange={(e) => {
+                setVolume(e.currentTarget.value);
+              }}
+            />
+            <button>등록하기</button>
+          </form>
+        </div>
+      ) : (
+        <h1>Login Plz</h1>
+      )}
     </>
   );
 }
