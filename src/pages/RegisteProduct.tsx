@@ -4,13 +4,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useRecoilValue } from "recoil";
 import { isLogginAtom } from "../atom";
-import { CommonOutput } from "../interface/CommonIF";
-
-interface RegisterProductOutput extends CommonOutput {}
-
-interface RegisterProductIF {
-  registerProduct: RegisterProductOutput;
-}
+import { RegisterProductIF } from "../interface/RgisterProduct";
 
 const REGISTE_PRODUCT = gql`
   mutation registerProduct($registerProductInput: RegisterProductInput!) {
