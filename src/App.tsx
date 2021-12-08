@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Board from "./routes/Board";
-import EditProfile from "./routes/EditProfile";
-import Home from "./routes/Home";
-import Login from "./routes/Login";
-import Product from "./routes/Product";
-import Profile from "./routes/Profile";
-import RegisteProduct from "./routes/RegisteProduct";
-import Register from "./routes/RegisteUser";
+import EditProfile from "./pages/EditProfile";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Product from "./pages/Product";
+import Profile from "./pages/Profile";
+import RegisteProduct from "./pages/RegisteProduct";
+import Register from "./pages/RegisteUser";
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/board" component={Board} />
         <Route exact path="/product" component={Product} />
         <Route exact path="/product/registe" component={RegisteProduct} />
         <Route exact path="/profile" component={Profile} />

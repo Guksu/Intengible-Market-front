@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { useRecoilValue } from "recoil";
 import { isLogginAtom } from "../atom";
@@ -40,6 +41,7 @@ const GET_PRODUCT = gql`
 function Product() {
   const history = useHistory();
   const isLoggin = useRecoilValue(isLogginAtom);
+  const [purchaseNum, setPurchaseNum] = useState(0);
   const { data: productList } = useQuery<GetProductIF>(GET_PRODUCT);
   const realProductList = productList?.getProduct.product?.filter(
     (item) => item.nowVolume > 0
@@ -55,11 +57,26 @@ function Product() {
               <ul key={item.name}>
                 <li>상품명: {item.name}</li>
                 <li>
-                  상품 이미지: <img src={item.img} alt={item.name} />{" "}
+                  상품 이미지:{" "}
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    height="300"
+                    width="200"
+                  />{" "}
                 </li>
                 <li>상세설명: {item.description}</li>
                 <li>가격: {item.price}</li>
                 <li>수량: {item.nowVolume}</li>
+                <input
+                  type="number"
+                  min={0}
+                  max={item.nowVolume}
+                  placeholder="수량을 선택하세요"
+                  onChange={(e) => {
+                    setPurchaseNum(parseInt(e.currentTarget.value));
+                  }}
+                />
                 <button>구입하기</button>
               </ul>
             );
