@@ -17,7 +17,7 @@ function Header() {
   };
   return (
     <>
-      <h1 onClick={() => history.push("/")}>Intengible Market</h1>
+      <h1 onClick={() => history.push("/")}>Photo Market</h1>
       <span onClick={() => history.push("/product")}>상품</span>
       <span onClick={() => history.push("/board")}>게시판</span>
       {isLoggin ? (

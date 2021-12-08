@@ -8,6 +8,7 @@ import Product from "./pages/Product";
 import Profile from "./pages/Profile";
 import RegisteProduct from "./pages/RegisteProduct";
 import Register from "./pages/RegisteUser";
+import GlobalStyles from "./styles/GlobalStyle";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/profile/edit" component={EditProfile} />
       </Switch>
+      <GlobalStyles />
     </BrowserRouter>
   );
 }
