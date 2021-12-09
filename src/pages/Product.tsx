@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { useHistory } from "react-router";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { isLogginAtom } from "../atom";
 import { GetProductIF } from "../interface/ProductIF";
 
@@ -20,6 +21,22 @@ const GET_PRODUCT = gql`
     }
   }
 `;
+const ListTitle = styled.div`
+  font-size: 30px;
+  text-align: center;
+  margin-top: 5%;
+`;
+
+const ProductBtn = styled.button`
+  margin-left: 80%;
+  min-width: 8vw;
+`;
+
+const ListDiv = styled.div`
+  display: grid;
+  grid-template-columns: minmax(30%, 50%) minmax(30%, 50%);
+  margin: 3% 20%;
+`;
 
 function Product() {
   const history = useHistory();
@@ -31,15 +48,19 @@ function Product() {
 
   return (
     <>
-      <h1>상품 목록</h1>
-      <div>
+      <ListTitle>상품 목록</ListTitle>
+      {isLoggin && (
+        <ProductBtn onClick={() => history.push("/product/registe")}>
+          상품 등록
+        </ProductBtn>
+      )}
+      <ListDiv>
         {productList?.getProduct.ok &&
           realProductList?.map((item) => {
             return (
               <ul key={item.name}>
                 <li>상품명: {item.name}</li>
                 <li>
-                  상품 이미지:{" "}
                   <img
                     src={item.img}
                     alt={item.name}
@@ -61,12 +82,7 @@ function Product() {
               </ul>
             );
           })}
-      </div>
-      {isLoggin && (
-        <button onClick={() => history.push("/product/registe")}>
-          상품 등록
-        </button>
-      )}
+      </ListDiv>
     </>
   );
 }

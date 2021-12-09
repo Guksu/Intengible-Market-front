@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { isLogginAtom } from "../atom";
 import { RegisterProductIF } from "../interface/RgisterProduct";
 
@@ -13,6 +14,26 @@ const REGISTE_PRODUCT = gql`
       error
     }
   }
+`;
+
+const RegDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  margin-top: 15%;
+`;
+
+const RegiForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  min-width: 30vw;
+`;
+
+const RegiInput = styled.input`
+  border: 0px;
+  border-bottom: 1px solid black;
+  margin: 2%;
 `;
 
 function RegisteProduct() {
@@ -75,19 +96,18 @@ function RegisteProduct() {
   return (
     <>
       {isLoggin ? (
-        <div>
-          <form onSubmit={onSubmit}>
-            상품명 :{" "}
-            <input
+        <RegDiv>
+          <RegiForm onSubmit={onSubmit}>
+            <RegiInput
               type="text"
               required
               name="name"
               onChange={(e) => {
                 setName(e.currentTarget.value);
               }}
+              placeholder="상품명"
             />
-            이미지등록:{" "}
-            <input
+            <RegiInput
               type="file"
               required
               name="file"
@@ -96,17 +116,16 @@ function RegisteProduct() {
                 setFile(e.currentTarget.files);
               }}
             />
-            상세설명 :{" "}
-            <textarea
+            <RegiInput
               required
               name="description"
-              maxLength={400}
+              maxLength={100}
               onChange={(e) => {
                 setDescription(e.currentTarget.value);
               }}
+              placeholder="상세설명"
             />
-            가격:{" "}
-            <input
+            <RegiInput
               type="text"
               required
               onInput={changNum}
@@ -114,9 +133,9 @@ function RegisteProduct() {
               onChange={(e) => {
                 setPrice(e.currentTarget.value);
               }}
+              placeholder="가격"
             />
-            수량 :{" "}
-            <input
+            <RegiInput
               type="text"
               required
               onInput={changNum}
@@ -124,10 +143,11 @@ function RegisteProduct() {
               onChange={(e) => {
                 setVolume(e.currentTarget.value);
               }}
+              placeholder="수량"
             />
             <button>등록하기</button>
-          </form>
-        </div>
+          </RegiForm>
+        </RegDiv>
       ) : (
         <h1>Login Plz</h1>
       )}

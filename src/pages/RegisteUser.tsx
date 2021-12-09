@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import styled from "styled-components";
 import { CreateAccount } from "../interface/RegisterIF";
 
 const CREATE_USER = gql`
@@ -11,6 +12,25 @@ const CREATE_USER = gql`
       error
     }
   }
+`;
+const RegDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  margin-top: 15%;
+`;
+
+const RegiForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  min-width: 30vw;
+`;
+
+const RegiInput = styled.input`
+  border: 0px;
+  border-bottom: 1px solid black;
+  margin: 2%;
 `;
 
 function Register() {
@@ -42,25 +62,25 @@ function Register() {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        아이디 :{" "}
-        <input
+    <RegDiv>
+      <RegiForm onSubmit={onSubmit}>
+        <RegiInput
           type="text"
           required
           name="id"
           onChange={(e) => setRegId(e.currentTarget.value)}
+          placeholder="아이디를 입력하세요"
         />
-        비밀번호 :{" "}
-        <input
+        <RegiInput
           type="text"
           required
           name="password"
           onChange={(e) => setRegPassword(e.currentTarget.value)}
+          placeholder="비밀번호를 입력하세요"
         />
         <button>가입하기</button>
-      </form>
-    </>
+      </RegiForm>
+    </RegDiv>
   );
 }
 

@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { useState } from "react";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { isLogginAtom } from "../atom";
 import { LoginMutation } from "../interface/LoginIF";
 
@@ -14,6 +15,26 @@ const LOGIN = gql`
       token
     }
   }
+`;
+
+const LoginDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  margin-top: 15%;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  min-width: 30vw;
+`;
+
+const LoginInput = styled.input`
+  border: 0px;
+  border-bottom: 1px solid black;
+  margin: 2%;
 `;
 
 function Login() {
@@ -46,26 +67,26 @@ function Login() {
     }
   };
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        아이디 :{" "}
-        <input
+    <LoginDiv>
+      <LoginForm onSubmit={onSubmit}>
+        <LoginInput
           type="text"
           required
           name="id"
           onChange={(e) => setId(e.currentTarget.value)}
+          placeholder="아이디를 입력하세요"
         />
-        비밀번호 :{" "}
-        <input
+        <LoginInput
           type="text"
           required
           name="password"
           onChange={(e) => setPassword(e.currentTarget.value)}
+          placeholder="비밀번호를 입력하세요"
         />
         <button>로그인</button>
-      </form>
+      </LoginForm>
       <button onClick={() => history.push("/register")}>회원가입</button>
-    </>
+    </LoginDiv>
   );
 }
 
